@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-float **read_data(int *rows, int *columns);
-float **clean_delete(float **data, int rows, int columns, int *new_rows, int *new_columns);
-void clean_impute(float **data, int rows, int columns);
-void output_data(float **data, int rows, int columns);
+void usage() {
+    printf("Usage: clean [-d]\n");
+}
 
-int main() {
+int main(int argc, char *argv[]) {
+    int delete_flag = 0;
+
+    if (argc == 2 && strcmp(argv[1], "-d") == 0) {
+        delete_flag = 1;
+    } else if (argc != 2 && argc != 1) {
+        usage();
+        return EXIT_FAILURE;
+    }
 
     return EXIT_SUCCESS;
 }
