@@ -31,8 +31,19 @@ int main(int argc, char *argv[]) {
     int rows, columns;
     float **data = read_data(&rows, &columns);
 
-    clean_impute(data, rows, columns);
-    output_data(data, rows, columns);
+    if (delete_flag) {
+        int new_rows, new_columns;
+        float **new_data = clean_delete(data, rows, columns, &new_rows, &new_columns);
+        free_memory(data, rows);
+        data = new_data;
+        rows = new_rows;
+        columns = new_columns;
+
+        output_data(data, rows, columns);
+    } else {
+        clean_impute(data, rows, columns);
+        output_data(data, rows, columns);
+    }
 
     free_memory(data, rows);
     return EXIT_SUCCESS;
