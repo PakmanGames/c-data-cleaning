@@ -1,0 +1,20 @@
+name: CI - Test clean utility
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build clean
+        run: make; ./clean
+
+      - name: upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean
+          path: ./clean
