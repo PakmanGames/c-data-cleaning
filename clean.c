@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "clean.h"
+#include "data_processing.h"
 
 void usage() {
     printf("Usage: clean [-d]\n");
@@ -15,6 +17,9 @@ int main(int argc, char *argv[]) {
         usage();
         return EXIT_FAILURE;
     }
+
+    int rows, columns;
+    float **data = read_data(&rows, &columns);
 
     return EXIT_SUCCESS;
 }
