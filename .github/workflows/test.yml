@@ -31,6 +31,15 @@ jobs:
           name: cleaned_data2.txt upload
           path: ./cleaned_data2.txt
 
+      - name: Test clean with wbcd.txt
+        run: ./clean < wbcd.txt > cleaned_wbcd.txt
+
+      - name: upload cleaned wbcd.txt
+        uses: actions/upload-artifact@v4
+        with:
+          name: cleaned_wbcd.txt upload
+          path: ./cleaned_wbcd.txt
+
       - name: upload binary
         uses: actions/upload-artifact@v4
         with:
