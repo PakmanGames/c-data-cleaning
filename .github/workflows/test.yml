@@ -22,6 +22,15 @@ jobs:
           name: cleaned_data.txt upload
           path: ./cleaned_data.txt
 
+      - name: Test clean with bad_data2.txt
+        run: ./clean < bad_data2.txt > cleaned_data2.txt
+
+      - name: upload cleaned bad_data2.txt
+        uses: actions/upload-artifact@v4
+        with:
+          name: cleaned_data2.txt upload
+          path: ./cleaned_data2.txt
+
       - name: upload binary
         uses: actions/upload-artifact@v4
         with:
