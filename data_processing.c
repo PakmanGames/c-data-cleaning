@@ -3,6 +3,13 @@
 #include <string.h>
 #include "data_processing.h"
 
+void free_memory(float **data, int rows) {
+    for (int i = 0; i < rows; i++) {
+        free(data[i]);
+    }
+    free(data);
+}
+
 float **read_data(int *rows, int *columns) {
     if (scanf("%d %d", rows, columns) != 2) {
         return NULL;
@@ -16,10 +23,7 @@ float **read_data(int *rows, int *columns) {
     for (int i = 0; i < *rows; i++) {
         data[i] = malloc(*columns * sizeof(float));
         if (data[i] == NULL) {
-            for (int j = 0; j < i; j++) {
-                free(data[j]);
-            }
-            free(data);
+            free_memory(data, i);
             return NULL;
         }
     }
@@ -27,10 +31,7 @@ float **read_data(int *rows, int *columns) {
     for (int i = 0; i < *rows; i++) {
         for (int j = 0; j < *columns; j++) {
             if (scanf("%f", &data[i][j]) != 1) {
-                for (int k = 0; k <= i; k++) {
-                    free(data[k]);
-                }
-                free(data);
+                free_memory(data, *rows);
                 return NULL;
             }
         }
