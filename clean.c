@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
     int rows, columns;
     float **data = read_data(&rows, &columns);
 
-    // clean_impute(data, rows, columns);
+    clean_impute(data, rows, columns);
     output_data(data, rows, columns);
 
     free_memory(data, rows);

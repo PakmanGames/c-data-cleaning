@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include "data_processing.h"
 
 void free_memory(float **data, int rows) {
@@ -37,6 +38,27 @@ float **read_data(int *rows, int *columns) {
         }
     }
 
-    printf("Data read success (FOR TESTING)\n");
     return data;
+}
+
+void clean_impute(float **data, int rows, int columns) {
+    for (int j = 0; j < columns; j++) {
+        float sum = 0;
+        int count = 0;
+
+        for (int i = 0; i < rows; i++) {
+            if (!isnan(data[i][j])) {
+                sum += data[i][j];
+                count++;
+            }
+        }
+
+        float mean = (count > 0) ? sum / count : 0.0;
+
+        for (int i = 0; i < rows; i++) {
+            if (isnan(data[i][j])) {
+                data[i][j] = mean;
+            }
+        }
+    }
 }
