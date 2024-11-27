@@ -8,6 +8,16 @@ void usage() {
     printf("Usage: clean [-d]\n");
 }
 
+void output_data(float **data, int rows, int columns) {
+    printf("%d %d\n", rows, columns);
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < columns; j++) {
+            printf("%f ", data[i][j]);
+        }
+        printf("\n");
+    }
+}
+
 int main(int argc, char *argv[]) {
     int delete_flag = 0;
 
@@ -21,5 +31,9 @@ int main(int argc, char *argv[]) {
     int rows, columns;
     float **data = read_data(&rows, &columns);
 
+    // clean_impute(data, rows, columns);
+    output_data(data, rows, columns);
+
+    free_memory(data, rows);
     return EXIT_SUCCESS;
 }
